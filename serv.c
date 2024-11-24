@@ -22,6 +22,7 @@ int main(int argc, char const* argv[])
 		char sbuf[1024];
     char* token;
 
+
     // define server address 
     struct sockaddr_in servAddr; 
   
@@ -69,6 +70,35 @@ int main(int argc, char const* argv[])
 								sprintf(sbuf,"%s%d", ACK, val);
 								list_add_to_front(mylist,val);
 						}
+            else if(strcmp(token,"add_back") == 0){
+							  token = strtok(NULL, " ");
+								idx = atoi(token);
+								// Make a Call
+								list_add_to_back(mylist,idx);
+								sprintf(sbuf,"%s%d", ACK, val);
+						}
+            else if(strcmp(token,"remove_front") == 0){
+							  token = strtok(NULL, " ");
+								// Make a Call
+								list_remove_from_front(mylist);
+								sprintf(sbuf,"%s%d", ACK, val);
+						}
+            else if(strcmp(token,"remove_back") == 0){
+							  token = strtok(NULL, " ");
+								// Make a Call
+								list_remove_from_back(mylist);
+								sprintf(sbuf,"%s", ACK);
+						}
+           else if(strcmp(token,"add_position") == 0){
+							  token = strtok(NULL, " ");  // get next token (value)
+								idx = atoi(token);
+                token = strtok(NULL, " ");  // get next token (value)
+								val = atoi(token);
+
+								// Make a Call
+                list_add_at_index(mylist, idx, val);
+								sprintf(sbuf,"%s%d%d", ACK, val, idx);
+						}
 						else if(strcmp(token,"remove_position") == 0){
 							  token = strtok(NULL, " ");
 								idx = atoi(token);
@@ -76,12 +106,16 @@ int main(int argc, char const* argv[])
 								val = list_remove_at_index(mylist,idx);
 								sprintf(sbuf,"%s%d", ACK, val);
 						}
+            else if(strcmp(token,"get") == 0){
+							  token = strtok(NULL, " ");
+								idx = atoi(token);
+								// Make a Call
+								val = list_get_elem_at(mylist,idx);
+								sprintf(sbuf,"%s%d", ACK, val);
+						}
 						else if(strcmp(token,"print") == 0){
 							  sprintf(sbuf,"%s", listToString(mylist));
 						}
-						// ADD THE OTHER OPERATIONS
-
-
                 // send's messages to client socket 
             send(clientSocket, sbuf, sizeof(sbuf), 0);
         }

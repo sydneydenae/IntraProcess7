@@ -11,6 +11,7 @@
 list_t *list_alloc() { 
   list_t* mylist =  (list_t *) malloc(sizeof(list_t)); 
   mylist->head = NULL;
+  return mylist;
 }
 
 void list_free(list_t *l) {
@@ -227,7 +228,6 @@ elem list_remove_at_index(list_t *l, int index) {
 
   // set current node
   node_t *currentNode = l -> head;
-  node_t *prevNode = NULL;
 
 
   // traverse and update current until reaching correct spot for deletion
@@ -255,7 +255,6 @@ bool list_is_in(list_t *l, elem value) {
   } 
 
   // traverse list and check for value
-  bool isInList = false;
   node_t *currentNode = l -> head;
   while (currentNode != NULL) {
     if (currentNode -> value == value){
@@ -278,7 +277,6 @@ elem list_get_elem_at(list_t *l, int index) {
 
   // set current node
   node_t *currentNode = l -> head;
-  node_t *prevNode = NULL;
 
   // traverse and update current until reaching correct spot for capture
   int i;
@@ -311,6 +309,7 @@ int list_get_index_of(list_t *l, elem value) {
       count++;
     }
   }
+  return -1;
 
 }
 
