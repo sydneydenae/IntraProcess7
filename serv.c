@@ -80,14 +80,14 @@ int main(int argc, char const* argv[])
             else if(strcmp(token,"remove_front") == 0){
 							  token = strtok(NULL, " ");
 								// Make a Call
-								list_remove_from_front(mylist);
-								sprintf(sbuf,"%s%d", ACK, val);
+								val = list_remove_from_front(mylist);
+                sprintf(sbuf,"%s%d", "Removed number is ", val);
 						}
             else if(strcmp(token,"remove_back") == 0){
 							  token = strtok(NULL, " ");
 								// Make a Call
-								list_remove_from_back(mylist);
-								sprintf(sbuf,"%s", ACK);
+								val = list_remove_from_back(mylist);
+                sprintf(sbuf,"%s%d", "Removed number is ", val);
 						}
            else if(strcmp(token,"add_position") == 0){
 							  token = strtok(NULL, " ");  // get next token (value)
@@ -96,22 +96,22 @@ int main(int argc, char const* argv[])
 								val = atoi(token);
 
 								// Make a Call
-                list_add_at_index(mylist, idx, val);
-								sprintf(sbuf,"%s%d%d", ACK, val, idx);
+                list_add_at_index(mylist, val, idx);
+								sprintf(sbuf,"%s%d%d", ACK, idx, val);
 						}
 						else if(strcmp(token,"remove_position") == 0){
 							  token = strtok(NULL, " ");
 								idx = atoi(token);
 								// Make a Call
 								val = list_remove_at_index(mylist,idx);
-								sprintf(sbuf,"%s%d", ACK, val);
+								sprintf(sbuf,"%s%d", "Removed number is ", val);
 						}
             else if(strcmp(token,"get") == 0){
 							  token = strtok(NULL, " ");
 								idx = atoi(token);
 								// Make a Call
 								val = list_get_elem_at(mylist,idx);
-								sprintf(sbuf,"%s%d", ACK, val);
+								sprintf(sbuf,"%s%d", "Value = ", idx);
 						}
 						else if(strcmp(token,"print") == 0){
 							  sprintf(sbuf,"%s", listToString(mylist));
